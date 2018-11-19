@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput v-on:addTodo="addTodo"></TodoInput>
-    <TodoList v-bind:propsdata="todoItems" v-on:removeTodo="removeTodo" v-on:updateTodo="updateTodo"></TodoList>
+    <TodoList v-bind:propsdata="todoItems" v-on:removeTodo="removeTodo" v-on:changeStatus="changeStatus"></TodoList>
     <TodoFooter v-on:removeAll="clearAll"></TodoFooter>
   </div>
 </template>
@@ -12,6 +12,8 @@ import TodoHeader from './components/TodoHeader.vue'
 import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
+import Vue from 'vue'
+
 export default{
   components: {
     'TodoHeader': TodoHeader,
@@ -22,9 +24,7 @@ export default{
   data() {
     return {
       todoItems: [{
-        status: [{
-          0:''
-        }],
+        status: null,
         name: '',
         Created_date: '',
         _id: ''
@@ -58,6 +58,18 @@ export default{
         console.log(result);
         console.log('getTodos()');
       })
+    },
+    changeStatus(todoItem, index) {
+      var vm = this;
+      this.$http.defaults.headers.put['Content-Type']='application/json';
+      this.$http.put('http://localhost:3000/tasks/' + todoItem._id, {
+        status:!todoItem.status
+      }).then((result) => {
+        Vue.set(vm.todoItems[index], 'status', result.data.status);
+        console.log(result);
+      })
+    },
+    clearAll(){
     }
   },
   created(){

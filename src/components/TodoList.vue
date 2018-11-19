@@ -2,7 +2,7 @@
   <section>
     <transition-group name="list" tag="ul">
       <li v-for="(todoItem, index) in propsdata" :key="todoItem._id" class="shadow">
-        <i class="checkBtn fa fa-square" aria-hidden="true"></i>
+        <i :class="[todoItem.status ? 'checkBtn fa fa-check-square' : 'checkBtn fa fa-square']" aria-hidden="true" @click="changeStatus(todoItem, index)"></i>
         {{todoItem.name}}
         <span class="removeBtn" type="button" @click="removeTodo(todoItem)">
           <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -21,9 +21,8 @@ export default{
     removeTodo(todoItem) {
       this.$emit('removeTodo', todoItem);
     },
-    updateTodo(todoItem) {
-
-      this.$emit('updateTodo', todoItem);
+    changeStatus(todoItem, index) {
+      this.$emit('changeStatus', todoItem, index);
     }
   },
 }
@@ -47,13 +46,12 @@ li {
   border-radius: 5px;
 }
 .checkBtn {
-  line-height: 45px;
+  line-height: 53px;
   color: #62acde;
   margin-right: 5px;
 }
 .removeBtn{
-  position: absolute;
-  right: 15px;
+  margin-left: auto;
   color: #de4343;
 }
 .updateBtn {
