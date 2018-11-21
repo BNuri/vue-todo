@@ -70,6 +70,11 @@ export default{
       })
     },
     clearAll(){
+      console.log('clearAll');
+      var vm = this;
+      this.$http.delete('http://localhost:3000/tasks').then((result) => {
+        vm.todoItems.splice(0, vm.todoItems.length);
+      })
     }
   },
   created(){
