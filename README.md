@@ -1,18 +1,8 @@
 # vue-todo
 
-> A Vue.js project
+> Vue.js를 이용하여 만든 TODO LIST 입니다.
 
-## Build Setup
+> 2018.10~ 2018.11 (1개월)
 
-``` bash
-# install dependencies
-npm install
+> 개인 프로젝트
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
