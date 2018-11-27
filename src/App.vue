@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput v-on:addTodo="addTodo"></TodoInput>
-    <TodoList v-bind:propsdata="todoItems" v-on:removeTodo="removeTodo" v-on:changeStatus="changeStatus"></TodoList>
+    <TodoList v-bind:propsdata="sortedArray" v-on:removeTodo="removeTodo" v-on:changeStatus="changeStatus"></TodoList>
     <TodoFooter v-on:removeAll="clearAll"></TodoFooter>
   </div>
 </template>
@@ -80,6 +80,11 @@ export default{
   created(){
     console.log('created()');
     this.getTodos();
+  },
+  computed: {
+    sortedArray: function() {
+      return this.todoItems.sort(function(a, b){return b.status - a.status;});
+    }
   }
 }
 </script>

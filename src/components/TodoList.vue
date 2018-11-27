@@ -24,7 +24,7 @@ export default{
     changeStatus(todoItem, index) {
       this.$emit('changeStatus', todoItem, index);
     }
-  },
+  }
 }
 </script>
 
