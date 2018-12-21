@@ -1,9 +1,8 @@
 <template>
-  <transition name="modal">
+  <Transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-
           <div class="modal-header">
             <slot name="header">
               default header
@@ -27,7 +26,7 @@
         </div>
       </div>
     </div>
-  </transition>
+  </Transition>
 </template>
 
 <script>

@@ -1,31 +1,30 @@
 <template>
   <section>
-    <transition-group name="list" tag="ul">
+    <TransitionGroup name="list" tag="ul">
       <li v-for="(todoItem, index) in propsdata" :key="todoItem._id" class="shadow">
-        <i :class="[todoItem.status ? 'checkBtn fa fa-check-square' : 'checkBtn fa fa-square']" aria-hidden="true" @click="changeStatus(todoItem, index)"></i>
-        {{todoItem.name}}
+        <i :class="[todoItem.status ? 'checkBtn fa fa-check-square' : 'checkBtn fa fa-square']" aria-hidden="true" @click="changeStatus(todoItem, index)" />
+        {{ todoItem.name }}
         <span class="removeBtn" type="button" @click="removeTodo(todoItem)">
-          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <i class="fa fa-trash-o" aria-hidden="true" />
         </span>
       </li>
-    </transition-group>
+    </TransitionGroup>
   </section>
 </template>
 
 <script>
-import Modal from './common/Modal.vue'
 
 export default{
   props: ['propsdata'],
   methods: {
-    removeTodo(todoItem) {
+    removeTodo (todoItem) {
       this.$emit('removeTodo', todoItem);
     },
-    changeStatus(todoItem, index) {
+    changeStatus (todoItem, index) {
       this.$emit('changeStatus', todoItem, index);
     }
   }
-}
+};
 </script>
 
 <style>

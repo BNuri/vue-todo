@@ -1,49 +1,48 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" v-model="newTodoItem" placeholder="Type what you have to do" v-on:keyup.enter="addTodo">
-    <span class="addContainer" v-on:click="addTodo">
-      <i class="addBtn fa fa-plus" aria-hidden="true"></i>
+    <input type="text" v-model="newTodoItem" placeholder="Type what you have to do" @keyup.enter="addTodo">
+    <span class="addContainer" @click="addTodo">
+      <i class="addBtn fa fa-plus" aria-hidden="true" />
     </span>
-    <modal v-if="showModal" @close="showModal = false">
+    <Modal v-if="showModal" @close="showModal = false">
       <h3 slot="header">경고</h3>
-      <span slot="body"></span>
-      <span slot="footer" @click="showModal = false">
-        할 일을 입력하세요.
-        <i class="closeModalBtn fa fa-times" aria-hidden="true"></i>
+      <span slot="body" />
+      <span slot="footer" @click="showModal = false">할 일을 입력하세요.
+        <i class="closeModalBtn fa fa-times" aria-hidden="true" />
       </span>
-    </modal>
-    </div>
+    </Modal>
+  </div>
 </template>
 
 <script>
-import Modal from './common/Modal.vue'
+import Modal from './common/Modal.vue';
 
 export default{
-  data() {
-    return{
+  components: {
+    Modal: Modal
+  },
+  data () {
+    return {
       newTodoItem: '',
       showModal: false
-    }
+    };
   },
   methods: {
-    addTodo(){
+    addTodo () {
       console.log('addTodo()');
-      if(this.newTodoItem !== ""){
+      if (this.newTodoItem !== '') {
         var value = this.newTodoItem && this.newTodoItem.trim();
         this.$emit('addTodo', value);
         this.clearInput();
-      }else {
+      } else {
         this.showModal = !this.showModal;
       }
     },
-    clearInput(){
+    clearInput () {
       this.newTodoItem = '';
     }
-  },
-  components: {
-    Modal: Modal
   }
-}
+};
 </script>
 
 <style scoped>
