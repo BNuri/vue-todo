@@ -1,14 +1,38 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" v-model="newTodoItem" placeholder="Type what you have to do" @keyup.enter="addTodo">
-    <span class="addContainer" @click="addTodo">
-      <i class="addBtn fa fa-plus" aria-hidden="true" />
+    <input
+      type="text"
+      v-model="newTodoItem"
+      placeholder="Type what you have to do"
+      @keyup.enter="addTodo"
+    >
+
+    <span
+      class="addContainer"
+      @click="addTodo"
+    >
+      <i
+        class="addBtn fa fa-plus"
+        aria-hidden="true"
+      />
     </span>
-    <Modal v-if="showModal" @close="showModal = false">
-      <h3 slot="header">경고</h3>
+    <Modal
+      v-if="showModal"
+      @close="showModal = false"
+    >
+      <h3 slot="header">
+        경고
+      </h3>
       <span slot="body" />
-      <span slot="footer" @click="showModal = false">할 일을 입력하세요.
-        <i class="closeModalBtn fa fa-times" aria-hidden="true" />
+      <span
+        slot="footer"
+        @click="showModal = false"
+      >
+        할 일을 입력하세요.
+        <i
+          class="closeModalBtn fa fa-times"
+          aria-hidden="true"
+        />
       </span>
     </Modal>
   </div>
@@ -29,10 +53,9 @@ export default{
   },
   methods: {
     addTodo () {
-      console.log('addTodo()');
       if (this.newTodoItem !== '') {
         var value = this.newTodoItem && this.newTodoItem.trim();
-        this.$emit('addTodo', value);
+        this.$store.dispatch('addTodo', value);
         this.clearInput();
       } else {
         this.showModal = !this.showModal;

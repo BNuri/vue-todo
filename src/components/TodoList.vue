@@ -1,11 +1,29 @@
 <template>
   <section>
-    <TransitionGroup name="list" tag="ul">
-      <li v-for="(todoItem, index) in propsdata" :key="todoItem._id" class="shadow">
-        <i :class="[todoItem.status ? 'checkBtn fa fa-check-square' : 'checkBtn fa fa-square']" aria-hidden="true" @click="changeStatus(todoItem, index)" />
+    <TransitionGroup
+      name="list"
+      tag="ul"
+    >
+      <li
+        v-for="(todoItem) in sortedArray"
+        :key="todoItem._id"
+        class="shadow"
+      >
+        <i
+          :class="[todoItem.status ? 'checkBtn fa fa-check-square' : 'checkBtn fa fa-square']"
+          aria-hidden="true"
+          @click="changeStatus({todoItem: todoItem})"
+        />
         {{ todoItem.name }}
-        <span class="removeBtn" type="button" @click="removeTodo(todoItem)">
-          <i class="fa fa-trash-o" aria-hidden="true" />
+        <span
+          class="removeBtn"
+          type="button"
+          @click="removeTodo(todoItem)"
+        >
+          <i
+            class="fa fa-trash-o"
+            aria-hidden="true"
+          />
         </span>
       </li>
     </TransitionGroup>
@@ -13,17 +31,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default{
-  props: ['propsdata'],
   methods: {
     removeTodo (todoItem) {
-      this.$emit('removeTodo', todoItem);
+      this.$store.dispatch('removeTodo', todoItem);
     },
-    changeStatus (todoItem, index) {
-      this.$emit('changeStatus', todoItem, index);
+    changeStatus (payload) {
+      this.$store.dispatch('changeStatus', payload);
     }
-  }
+  },
+  computed: mapGetters([
+    'sortedArray'
+  ])
 };
 </script>
 

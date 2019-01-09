@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import App from './App.vue';
-import axios from 'axios';
-
-Vue.prototype.$http = axios;
-Vue.config.productionTip = false;
+import { store } from './store';
 
 new Vue({ // eslint-disable-line no-new
   el: '#app',
+  store,
   render: h => h(App)
 });
+
+store.commit('increment');

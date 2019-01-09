@@ -1,6 +1,9 @@
 <template>
   <div class="clearAllContainer">
-    <span class="clearAllBtn" @click="clearTodo">
+    <span
+      class="clearAllBtn"
+      @click="clearTodo"
+    >
       Clear All
     </span>
   </div>
@@ -10,7 +13,7 @@
 export default{
   methods: {
     clearTodo () {
-      this.$emit('removeAll');
+      this.$store.dispatch('clearAll');
     }
   }
 };
